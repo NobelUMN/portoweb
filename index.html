@@ -76,7 +76,7 @@
             </div>
 
             <div class="headshot">
-                <img src="images\hero-headshot.webp" alt="nobel headshot">
+                <img src="images\PasFoto.webp" alt="nobel headshot">
             </div>
         </section>
 
@@ -340,7 +340,98 @@
         </section>
 
         <!--SECTION 4: Projects-->
-        <section id="proj"></section>
+        <section id="proj" class="projects-section">
+            <h2 class="projects-title">Projects</h2>
+            <p class="projects-subtitle">
+                Experience from web applications, IoT systems, and full-stack solutions.
+            </p>
+
+            <div class="projects-grid">
+                <!-- Project 1 -->
+                <article class="project-card">
+                    <div class="project-image">
+                        <img src="images/POS.jpeg" alt="MAXIMA UMN 2024 Client Website">
+                    </div>
+                    <div class="project-body">
+                        <div class="project-tags">
+                            <span>Laravel</span>
+                            <span>React.js</span>
+                            <span>MySQL</span>
+                            <span>Arduino</span>
+                        </div>
+                        <h3 class="project-name">Web Point of Sale (POS)</h3>
+                        <p class="project-date">Aug 2025 – Present</p>
+                        <p class="project-desc">
+                            Developed a POS web app with integrated cashier dashboard, real-time sales, barcode scanning using GM65, and CRUD product management. Built using Laravel (backend), React.js (frontend), and MySQL.
+                        </p>
+                        <a href="https://github.com/NobelUMN/portoweb" class="project-link" target="_blank">
+                            <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                            <span>View on GitHub</span>
+                        </a>
+                    </div>
+                </article>
+
+                <!-- Project 2 -->
+                <article class="project-card">
+                    <div class="project-image">
+                        <img src="images/placeholder1.jpg" alt="IoT Smart Home Dashboard">
+                    </div>
+                    <div class="project-body">
+                        <div class="project-tags">
+                            <span>Laravel</span>
+                            <span>MySQL</span>
+                            <span>Full-Stack</span>
+                            <span>CRUD</span>
+                        </div>
+                        <h3 class="project-name">Web Application for UMKM Pempek</h3>
+                        <p class="project-date">February 2025 – June 2025</p>
+                        <p class="project-desc">
+                            Developed a Laravel-based management system to support UMKM Pempek Maknobel with product, customer, and order management. Included CRUD dashboard, sales tracking, and real-time updates using MySQL.
+                        </p>
+                        <a href="https://github.com/NobelUMN/UMKMPempek" class="project-link" target="_blank">
+                            <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                            <span>View on GitHub</span>
+                        </a>
+                    </div>
+                </article>
+
+                <!-- Project 3 -->
+                <article class="project-card">
+                    <div class="project-image">
+                        <img src="images/placeholder2.jpg" alt="Portfolio Website Design">
+                    </div>
+                    <div class="project-body">
+                        <div class="project-tags">
+                            <span>Node.js</span>
+                            <span>Express</span>
+                            <span>JSON DB</span>
+                            <span>Web App</span>
+                        </div>
+                        <h3 class="project-name">Web Application for UMKM Toko ATK</h3>
+                        <p class="project-date">August 2025 - October 2025</p>
+                        <p class="project-desc">
+                            Designed a reusable design system and layout for a personal portfolio website, 
+                            focusing on readability, hierarchy, and consistent visual language.
+                        </p>
+                        <a href="https://github.com/NobelUMN/TokoGembira-Kelompok2" class="project-link" target="_blank">
+                            <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                            <span>View on GitHub</span>
+                        </a>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <!-- PROJECT GALLERY MODAL -->
+        <div id="project-modal" class="project-modal">
+            <div class="project-modal-backdrop"></div>
+
+            <div class="project-modal-content">
+                <button class="modal-close" aria-label="Close gallery">&times;</button>
+                <h3 id="modal-title">Project Gallery</h3>
+                <div class="modal-gallery" id="modal-gallery"></div>
+            </div>
+        </div>
 
         <!--SECTION 5: Contact-->
         <section id="cont" class="contact-section">
@@ -379,6 +470,87 @@
                 tab.classList.add("active");
                 document.getElementById(tab.dataset.tab).classList.add("active");
             });
+        });
+
+        // ================== PROJECT GALLERY MODAL ==================
+        const projectImages = document.querySelectorAll('.project-card .project-image');
+        const modal         = document.getElementById('project-modal');
+        const modalTitle    = document.getElementById('modal-title');
+        const modalGallery  = document.getElementById('modal-gallery');
+        const backdrop      = modal.querySelector('.project-modal-backdrop');
+        const closeBtn      = modal.querySelector('.modal-close');
+
+        // Data gallery per project-card (index 0,1,2 ...)
+        const galleryData = [
+            {
+                title: 'Web Point of Sale (POS) – Gallery',
+                images: [
+                    'images/placeholder1.jpg',
+                    'images/placeholder2.jpg',
+                    'images/placeholder1.jpg',
+                    'images/placeholder2.jpg',
+                    'images/placeholder1.jpg',
+                    'images/placeholder1.jpg'
+                ]
+            },
+            {
+                title: 'Web Application for UMKM Pempek – Gallery',
+                images: [
+                    'images/placeholder1.jpg',
+                    'images/placeholder2.jpg',
+                    'images/placeholder1.jpg',
+                    'images/placeholder2.jpg',
+                    'images/placeholder1.jpg',
+                    'images/placeholder1.jpg'
+                ]
+            },
+            {
+                title: 'Web Application for UMKM Toko ATK – Gallery',
+                images: [
+                    'images/placeholder1.jpg',
+                    'images/placeholder2.jpg',
+                    'images/placeholder1.jpg',
+                    'images/placeholder2.jpg',
+                    'images/placeholder1.jpg',
+                    'images/placeholder1.jpg'
+                ]
+            }
+        ];
+
+        function openProjectModal(index) {
+            const data = galleryData[index];
+            if (!data) return;
+
+            modalTitle.textContent = data.title;
+            modalGallery.innerHTML = '';
+
+            data.images.forEach(src => {
+                const img = document.createElement('img');
+                img.src = src;
+                img.alt = data.title;
+                modalGallery.appendChild(img);
+            });
+
+            modal.classList.add('open');
+        }
+
+        function closeProjectModal() {
+            modal.classList.remove('open');
+        }
+
+        // Klik gambar project => buka modal
+        projectImages.forEach((wrapper, index) => {
+            wrapper.style.cursor = 'pointer';
+            wrapper.addEventListener('click', () => {
+                openProjectModal(index);
+            });
+        });
+
+        // Tutup modal
+        backdrop.addEventListener('click', closeProjectModal);
+        closeBtn.addEventListener('click', closeProjectModal);
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') closeProjectModal();
         });
     </script>
 </body>
